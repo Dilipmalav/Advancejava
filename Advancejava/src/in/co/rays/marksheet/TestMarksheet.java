@@ -7,10 +7,10 @@ public class TestMarksheet {
 	
 	public static void main(String[] args) throws Exception {
 		
-		testAdd();
+		//testAdd();
 		//testDelete();
 		//testUpdate();
-		//testSearch();
+		testSearch();
 		//testFindByPk();
 	}
 
@@ -38,15 +38,20 @@ public class TestMarksheet {
 
 	private static void testSearch() throws Exception {
 		
+		MarksheetBean bean = new MarksheetBean();
+		bean.setName("s");
+		//bean.setRo_no(568);
+		
+		
 		MarksheetModel model = new MarksheetModel();
 		
-		List list = model.search();
+		List list = model.search(bean,1,5);
 		
 		Iterator it = list.iterator();
 		
 		while (it.hasNext()) {
 			
-			MarksheetBean bean = (MarksheetBean)it.next();
+			 bean = (MarksheetBean)it.next();
 			
 			System.out.print("\t"+bean.getId());
 			System.out.print("\t"+bean.getName());
@@ -65,7 +70,7 @@ public class TestMarksheet {
 		
 		  
 		  
-		  bean.setId(15);
+		//  bean.setId(15);
 		  bean.setName("deepu");
 		  bean.setRo_no(106);
 		  bean.setChe(88);
