@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.co.rays.util.JDBCDataSource;
+
 public class MarksheetModel {
 
 	public Integer nextPk() throws Exception {
 
 		int pk = 0;
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance04", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement ps = conn.prepareStatement("select max(id) from marksheet");
 
@@ -31,13 +31,14 @@ public class MarksheetModel {
 	public void add(MarksheetBean bean) throws Exception {
 		int pk = nextPk();
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
+		
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance04", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement ps = conn.prepareStatement("insert into marksheet values(?,?,?,?,?,?)");
 
 		ps.setInt(1, pk);
+		//ps.setInt(1, bean.getId());
 		ps.setString(2, bean.getName());
 		ps.setInt(3, bean.getRo_no());
 		ps.setInt(4, bean.getChe());
@@ -52,9 +53,9 @@ public class MarksheetModel {
 
 	public void delete(int id) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
+		
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance04", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
 		PreparedStatement ps = conn.prepareStatement("delete from marksheet where id=?");
 
@@ -67,12 +68,11 @@ public class MarksheetModel {
 
 	public void update(MarksheetBean bean) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
+		
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance04", "root", "root");
+		Connection conn = JDBCDataSource.getConnection();
 
-		PreparedStatement ps = conn
-				.prepareStatement("update marksheet set name=?,ro_no=?, che=?,phy=?,maths=? where id = ?");
+		PreparedStatement ps = conn.prepareStatement("update marksheet set name=?,ro_no=?, che=?,phy=?,maths=? where id = ?");
 
 		ps.setInt(6, bean.getId());
 		ps.setString(1, bean.getName());
@@ -89,17 +89,14 @@ public class MarksheetModel {
 
 	public List search(MarksheetBean bean,int pageno,int pagesize) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance04", "root", "root");
-         
+		Connection conn = JDBCDataSource.getConnection();
 		
 		StringBuffer sql = new StringBuffer("select * from marksheet where 1=1");
 		
 		
 
 		if (bean!=null) {
-			if (bean.getName() != null && bean.getName().length()>0) {
+			if (bean.getName()!= null && bean.getName().length()>0) {
 				sql.append(" and name like '"+bean.getName()+"%' ");
 			}
 				if(bean.getRo_no()>0) {
@@ -141,10 +138,8 @@ public class MarksheetModel {
 
 	public MarksheetBean findByPk(int id) throws Exception {
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance04", "root", "root");
-
+		Connection conn = JDBCDataSource.getConnection();
+		
 		PreparedStatement ps = conn.prepareStatement("select * from marksheet where id=?");
 
 		ps.setInt(1, id);

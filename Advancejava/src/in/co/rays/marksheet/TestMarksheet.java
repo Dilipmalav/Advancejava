@@ -7,11 +7,16 @@ public class TestMarksheet {
 	
 	public static void main(String[] args) throws Exception {
 		
-		//testAdd();
+		 testAdd();
 		//testDelete();
 		//testUpdate();
-		testSearch();
+		
+		//testSearch();
+//		for (int i = 0; i < 30; i++) {
+//			System.out.println(i);
+//			
 		//testFindByPk();
+//		}
 	}
 
 	private static void testFindByPk() throws Exception {
@@ -70,7 +75,7 @@ public class TestMarksheet {
 		
 		  
 		  
-		//  bean.setId(15);
+		 bean.setId(16);
 		  bean.setName("deepu");
 		  bean.setRo_no(106);
 		  bean.setChe(88);

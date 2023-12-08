@@ -9,9 +9,9 @@ public class TestMarksheet1 {
 	
 	public static void main(String[] args)throws Exception {
 		
-		  testAdd();
+		  //testAdd();
 		//testUpdate();
-		//testSearch();
+		testSearch();
 		//testFindByPk();
 		
 	}
